@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="MainWindow" Height="600" Width="1000" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0">
+        Title="MainWindow" Height="700" Width="1000" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0">
 
-    <DockPanel LastChildFill="False" Height="600" Width="1000" HorizontalAlignment="Center">
+    <DockPanel LastChildFill="False" Height="700" Width="1000" HorizontalAlignment="Center">
         <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 0" 
                 Height="100" Width="1000" Background="#ffe8c7">
-            <StackPanel>
+            <StackPanel Height="100" Width="1000" >
                 <Button Height="30" Width="100" Content="Reload" FontSize="15" FontFamily="FiraCode NF" FontWeight="DemiBold"
                         HorizontalAlignment="Right" Margin="0, 30, 80, 0" VerticalContentAlignment="Center"  
                         Command="{Binding ReloadGraphCommand}" Background="White">
@@ -21,25 +21,78 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Label Content="Title" Width="100" Height="25" HorizontalAlignment="Left" Margin="10, -80, 0, 0"
+                <Label Content="Title" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, -80, 0, 0"
                        FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
-                <TextBox MaxLength="10" Height="25" Width="200" Text="{Binding TitleLabelText,UpdateSourceTrigger=PropertyChanged}" 
-                         HorizontalAlignment="Left" Margin="140, -80, 0, 0"/>
-                <Label Content="X Axys" Width="100" Height="25" HorizontalAlignment="Left" Margin="10, -25, 0, 0"
+                <Label Content="X Axys" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, -25, 0, 0"
                        FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
-                <TextBox MaxLength="10" Height="25" Width="200" Text="{Binding XLabelText,UpdateSourceTrigger=PropertyChanged}" 
-                         HorizontalAlignment="Left" Margin="140, -25, 0, 0"/>
-                <Label Content="Y Axys" Width="100" Height="25" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
+                <Label Content="Y Axys" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
                        FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
-                <TextBox MaxLength="10" Height="25" Width="200" Text="{Binding YLabelText,UpdateSourceTrigger=PropertyChanged}" 
-                         HorizontalAlignment="Left" Margin="140, -25, 0, 0"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding TitleLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="80, -145, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding XLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="80, -85, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding YLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="80, -26, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <Label Content="N.Variables" Width="105" Height="27" HorizontalAlignment="Left" Margin="300, -145, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="Random Seed" Width="105" Height="27" HorizontalAlignment="Left" Margin="300, -85, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="N.Inputs" Width="105" Height="27" HorizontalAlignment="Left" Margin="300, -25, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding NumberVariablesText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="405, -150, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding RandomSeedText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="405, -90, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>                
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding CountText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="405, -30, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
             </StackPanel>
         </Border>
-        <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 2" Height="500" Width="1000" Background="WhiteSmoke">
+        <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 0" 
+                Height="100" Width="1000" Background="#ffe8c7">
+            <StackPanel Height="100" Width="1000">
+                <Label Content="Ticks" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="Y Axys" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="Y Axys" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <CheckBox Height="27" Width="200" Command="{Binding ShowTicksCommand}" IsChecked="True" 
+                         HorizontalAlignment="Left" Margin="80, -145, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding XLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="80, -85, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding YLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="80, -26, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <ComboBox Width="200" Height="27" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="300, -145, 0, 0" Padding="5, 0, 0, 0" 
+                          Background="White" BorderThickness="0.5" BorderBrush="Black" FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" 
+                          SelectedIndex="{Binding Path=SelectedItem, Mode=TwoWay}">
+                    <ComboBoxItem Content="Default"/>
+                    <ComboBoxItem Content="Seaborn"/>
+                    <ComboBoxItem Content="Control"/>
+                    <ComboBoxItem Content="Blue1"/>
+                    <ComboBoxItem Content="Blue2"/>
+                    <ComboBoxItem Content="Blue3"/>
+                    <ComboBoxItem Content="Light1"/>
+                    <ComboBoxItem Content="Light2"/>
+                    <ComboBoxItem Content="Gray1"/>
+                    <ComboBoxItem Content="Gray2"/>
+                    <ComboBoxItem Content="Black"/>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+        <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 2" Height="500" Width="1000" Background="White">
             <StackPanel DockPanel.Dock="top" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Border BorderBrush="Black" BorderThickness="2" Height="400" Width="600">
+                <Border BorderBrush="Black" BorderThickness="0" Height="400" Width="600">
                     <Image  VerticalAlignment="Center" HorizontalAlignment="Center" 
-                            Source="{Binding ImagePath}"/>
+                            Source="{Binding ImageGraph}"/>
                 </Border>
             </StackPanel>
         </Border>
