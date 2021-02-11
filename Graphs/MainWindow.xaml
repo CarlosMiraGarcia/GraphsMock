@@ -1,0 +1,47 @@
+﻿<Window x:Class="Graphs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="MainWindow" Height="600" Width="1000" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0">
+
+    <DockPanel LastChildFill="False" Height="600" Width="1000" HorizontalAlignment="Center">
+        <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 0" 
+                Height="100" Width="1000" Background="#ffe8c7">
+            <StackPanel>
+                <Button Height="30" Width="100" Content="Reload" FontSize="15" FontFamily="FiraCode NF" FontWeight="DemiBold"
+                        HorizontalAlignment="Right" Margin="0, 30, 80, 0" VerticalContentAlignment="Center"  
+                        Command="{Binding ReloadGraphCommand}" Background="White">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="BorderThickness" Value="4, 4, 4, 4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Label Content="Title" Width="100" Height="25" HorizontalAlignment="Left" Margin="10, -80, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <TextBox MaxLength="10" Height="25" Width="200" Text="{Binding TitleLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="140, -80, 0, 0"/>
+                <Label Content="X Axys" Width="100" Height="25" HorizontalAlignment="Left" Margin="10, -25, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <TextBox MaxLength="10" Height="25" Width="200" Text="{Binding XLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="140, -25, 0, 0"/>
+                <Label Content="Y Axys" Width="100" Height="25" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <TextBox MaxLength="10" Height="25" Width="200" Text="{Binding YLabelText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="140, -25, 0, 0"/>
+            </StackPanel>
+        </Border>
+        <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 2" Height="500" Width="1000" Background="WhiteSmoke">
+            <StackPanel DockPanel.Dock="top" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border BorderBrush="Black" BorderThickness="2" Height="400" Width="600">
+                    <Image  VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            Source="{Binding ImagePath}"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DockPanel>
+</Window>
