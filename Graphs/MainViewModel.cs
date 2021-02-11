@@ -60,14 +60,32 @@ namespace Graphs
             get { return countText; }
             set { OnPropertyChanged(ref countText, value); }
         }
-        public List<string> ThemesItems { get; set; }
 
-
-        private int selectedItem;
-        public int SelectedItem
+        private int selectedTheme;
+        public int SelectedTheme
         {
-            get { return selectedItem; }
-            set { OnPropertyChanged(ref selectedItem, value); Reload(); }
+            get { return selectedTheme; }
+            set { OnPropertyChanged(ref selectedTheme, value); LoadPlot(); }
+        }        
+        
+        private int selectedLineStyle;
+        public int SelectedLineStyle
+        {
+            get { return selectedLineStyle; }
+            set { OnPropertyChanged(ref selectedLineStyle, value); LoadPlot(); }
+        }
+        private float xSpacingText;
+        public float XSpacingText
+        {
+            get { return xSpacingText; }
+            set { OnPropertyChanged(ref xSpacingText, value); }
+        }
+
+        private float ySpacingText;
+        public float YSpacingText
+        {
+            get { return ySpacingText; }
+            set { OnPropertyChanged(ref ySpacingText, value); }
         }
 
         private Plot plt;
@@ -75,42 +93,50 @@ namespace Graphs
         private readonly string ImagePath = "1.png";
 
         private bool isTick;
+        private bool isGrid;
         public ICommand ReloadGraphCommand { get; set; }
         public ICommand ShowTicksCommand { get; set; }
+        public ICommand ShowGridCommand { get; set; }
 
         public MainViewModel()
         {
-            ReloadGraphCommand = new RelayCommand(param => Reload());
+            ReloadGraphCommand = new RelayCommand(param => LoadPlot());
             ShowTicksCommand = new RelayCommand(param => TickPressed());
+            ShowGridCommand = new RelayCommand(param => GridPressed());
             RandomSeedText = 12123;
             NumberVariablesText = 3;
+            CountText = 10;
             TitleLabelText = "Example Title";
             XLabelText = "Horizontal Units";
             YLabelText = "Vertical Units";
-            CountText = 10;
-            CreateList();
-            CreatePlot();
-            PlotProperties();
-            Ticks();
-            CreateBitmap();
+            XSpacingText = 1;
+            YSpacingText = .4f;
+            LoadPlot();
         }
-
         void CreatePlot()
         {
             plt = new ScottPlot.Plot(600, 400);
-        }
-
-        void PlotProperties()
-        {
-            Random rand = new Random(RandomSeedText);
-            int pointCount = CountText;
-            int lineCount = NumberVariablesText;
-
-            for (int i = 0; i < lineCount; i++)
-                plt.PlotSignal(DataGen.RandomWalk(rand, pointCount));
             plt.Title(TitleLabelText);
             plt.XLabel(XLabelText);
             plt.YLabel(YLabelText);
+            plt.Grid(lineStyle: LineStyle.Dash);
+            plt.Grid(xSpacing: XSpacingText, ySpacing: YSpacingText);
+            plt.Grid(lineWidth: 2);
+        }
+        void PlotProperties()
+        {
+            //Random rand = new Random(RandomSeedText);
+
+            //PlotHistogram();
+            PlotGraph();
+
+            //// Graph visualization
+            //int pointCount = CountText;
+            //int lineCount = NumberVariablesText;
+            //for (int i = 0; i < lineCount; i++)
+            //    plt.PlotSignal(DataGen.RandomWalk(rand, pointCount));
+
+            
         }
         void CreateBitmap()
         {            
@@ -128,18 +154,19 @@ namespace Graphs
             image.Freeze();
             ImageGraph = image;
         }
-        void Reload()
+        void LoadPlot()
         {
             CreatePlot();
-            ChangeTheme();
             PlotProperties();
+            ThemeSelection();
+            LineStyleSelection();
             Ticks();
+            Grid();
             CreateBitmap();
         }
-
-        void ChangeTheme()
+        void ThemeSelection()
         {
-            switch (SelectedItem)
+            switch (SelectedTheme)
             {
                 case 0:
                     plt.Style(ScottPlot.Style.Default);
@@ -178,6 +205,33 @@ namespace Graphs
                     plt.Style(ScottPlot.Style.Default);
                     break;
             }
+        }                
+        void LineStyleSelection()
+        {
+            switch (SelectedLineStyle)
+            {
+                case 0:
+                    plt.Grid(lineStyle: LineStyle.Dash);
+                    break;
+                case 1:
+                    plt.Grid(lineStyle: LineStyle.DashDot);
+                    break;              
+                case 2:
+                    plt.Grid(lineStyle: LineStyle.DashDotDot);
+                    break;              
+                case 3:
+                    plt.Grid(lineStyle: LineStyle.Dot);
+                    break;              
+                case 4:
+                    plt.Grid(lineStyle: LineStyle.None);
+                    break;              
+                case 5:
+                    plt.Grid(lineStyle: LineStyle.Solid);
+                    break;                
+                default:
+                    plt.Grid(lineStyle: LineStyle.Dash);
+                    break;
+            }
         }
         void Ticks()
         {
@@ -192,18 +246,45 @@ namespace Graphs
                 plt.Ticks(displayTicksX: true);
                 plt.Ticks(displayTicksY: true);
             }
-        }
+        }   
+        void Grid()
+        {
+            if (isGrid)
+            {
+                plt.Grid(enable: false);
+            }
 
+            else
+            {
+                plt.Grid(enable: true);
+            }
+        }
         void TickPressed()
         {
             isTick = !isTick;
-            Reload();
-        }
-
-        void CreateList()
+            LoadPlot();
+        }    
+        void GridPressed()
         {
-            ThemesItems = new List<string>();
-            ThemesItems.Add("Black");
+            isGrid = !isGrid;
+            LoadPlot();
+        }
+        void PlotHistogram()
+        {
+            double[] values = { 0, 20, 25, 28, 39, 59 };
+            var his = new ScottPlot.Statistics.Histogram(values, min: 0, max: 70);
+            double barWidth = his.binSize * 1.2;
+            plt.PlotBar(his.bins, his.countsFracCurve, barWidth: barWidth, outlineWidth: 0);
+            plt.PlotScatter(his.bins, his.countsFracCurve, markerSize: 0, lineWidth: 2, color: Color.Black);
+            plt.Axis(null, null, 0, null);
+        }
+        void PlotGraph()
+        {
+            Random rand = new Random(RandomSeedText);
+            int pointCount = CountText;
+            int lineCount = NumberVariablesText;
+            for (int i = 0; i < lineCount; i++)
+                plt.PlotSignal(DataGen.RandomWalk(rand, pointCount));
         }
     }
 }

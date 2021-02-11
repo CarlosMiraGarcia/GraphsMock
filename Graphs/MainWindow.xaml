@@ -58,22 +58,32 @@
             <StackPanel Height="100" Width="1000">
                 <Label Content="Ticks" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
                        FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
-                <Label Content="Y Axys" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
+                <Label Content="Grid" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
                        FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
                 <Label Content="Y Axys" Width="100" Height="27" HorizontalAlignment="Left" Margin="10, 3, 0, 0"
                        FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
                 <CheckBox Height="27" Width="200" Command="{Binding ShowTicksCommand}" IsChecked="True" 
                          HorizontalAlignment="Left" Margin="80, -145, 0, 0" Padding="5, 0, 0, 0"
                          FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
-                <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding XLabelText,UpdateSourceTrigger=PropertyChanged}" 
-                         HorizontalAlignment="Left" Margin="80, -85, 0, 0" Padding="5, 0, 0, 0"
+                <CheckBox Height="27" Width="200" Command="{Binding ShowGridCommand}" IsChecked="True" 
+                         HorizontalAlignment="Left" Margin="80, -85, 0, 0"  Padding="5, 0, 0, 0"
                          FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
                 <TextBox MaxLength="20" Height="27" Width="200" Text="{Binding YLabelText,UpdateSourceTrigger=PropertyChanged}" 
                          HorizontalAlignment="Left" Margin="80, -26, 0, 0" Padding="5, 0, 0, 0"
                          FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
-                <ComboBox Width="200" Height="27" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="300, -145, 0, 0" Padding="5, 0, 0, 0" 
-                          Background="White" BorderThickness="0.5" BorderBrush="Black" FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" 
-                          SelectedIndex="{Binding Path=SelectedItem, Mode=TwoWay}">
+                <Label Content="Theme" Width="100" Height="27" HorizontalAlignment="Left" Margin="300, -148, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="Grid Style" Width="100" Height="27" HorizontalAlignment="Left" Margin="300, -87, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="Grid Spacing" Width="125" Height="27" HorizontalAlignment="Left" Margin="300, -29, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="X:" Width="100" Height="27" HorizontalAlignment="Left" Margin="440, -29, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <Label Content="Y:" Width="100" Height="27" HorizontalAlignment="Left" Margin="540, -29, 0, 0"
+                       FontFamily="FiraCode NF" FontWeight="DemiBold" FontSize="14"/>
+                <ComboBox Width="200" Height="27" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="405, -148, 0, 0" 
+                          Padding="5, 0, 0, 0" Background="White" BorderThickness="0.5" BorderBrush="Black" FontFamily="FiraCode NF" 
+                          FontWeight="Normal" FontSize="14" SelectedIndex="{Binding Path=SelectedTheme, Mode=TwoWay}">
                     <ComboBoxItem Content="Default"/>
                     <ComboBoxItem Content="Seaborn"/>
                     <ComboBoxItem Content="Control"/>
@@ -86,6 +96,22 @@
                     <ComboBoxItem Content="Gray2"/>
                     <ComboBoxItem Content="Black"/>
                 </ComboBox>
+                <ComboBox Width="200" Height="27" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="405, -87, 0, 0" 
+                          Padding="5, 0, 0, 0" Background="White" BorderThickness="0.5" BorderBrush="Black" FontFamily="FiraCode NF" 
+                          FontWeight="Normal" FontSize="14" SelectedIndex="{Binding Path=SelectedLineStyle, Mode=TwoWay}">
+                    <ComboBoxItem Content="Dash"/>
+                    <ComboBoxItem Content="DashDot"/>
+                    <ComboBoxItem Content="DashDotDot"/>
+                    <ComboBoxItem Content="Dot"/>
+                    <ComboBoxItem Content="None"/>
+                    <ComboBoxItem Content="Solid"/>
+                </ComboBox>
+                <TextBox MaxLength="20" Height="27" Width="40" Text="{Binding XSpacingText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="465, -27, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
+                <TextBox MaxLength="20" Height="27" Width="40" Text="{Binding YSpacingText,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Margin="565, -27, 0, 0" Padding="5, 0, 0, 0"
+                         FontFamily="FiraCode NF" FontWeight="Normal" FontSize="14" VerticalContentAlignment="Center"/>
             </StackPanel>
         </Border>
         <Border DockPanel.Dock="Top" BorderBrush="#ffc87a" BorderThickness="2, 2, 2, 2" Height="500" Width="1000" Background="White">
